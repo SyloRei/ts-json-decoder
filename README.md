@@ -1,1 +1,1 @@
-# Typescript decoder
+# Typescript JSON Decoder
