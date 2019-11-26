@@ -2,7 +2,7 @@ type Promisify<T> = {
   readonly [P in keyof T]: Promise<T[P]>;
 };
 
-export function decodeObject<T>(rawObject: unknown, transform: (rawObject: unknown) => Promisify<T>): Promise<T> {
+export function decodeObject<T>(rawObject: unknown, transform: (rawObject: any) => Promisify<T>): Promise<T> {
   return new Promise<T>(async (resolve, reject) => {
     if (Array.isArray(rawObject)) {
       return reject(`${JSON.stringify(rawObject)} should not be array`);
