@@ -1,6 +1,8 @@
-type Promisify<T> = Required<{
-  readonly [P in keyof T]: Promise<T[P]>;
-}>;
+type Promisify<T> = Required<
+  {
+    readonly [P in keyof T]: Promise<T[P]>;
+  }
+>;
 
 export function decodeObject<T>(rawObject: unknown, transform: (rawObject: any) => Promisify<T>): Promise<T> {
   return new Promise<T>(async (resolve, reject) => {

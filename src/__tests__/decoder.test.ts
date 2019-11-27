@@ -31,33 +31,33 @@ test('decode string is failed', () => {
 });
 
 test('decode object is success', () => {
-    const userData = {
-        age: 30,
-        hasJob: true,
-        name: 'Joe'
-    }
-    
-    const result = decodeObject<IUser>(userData, (data) => ({
-        age: decodeNumber(data.age),
-        hasJob: decodeBoolean(data.hasJob),
-        name: decodeString(data.name)
-    }));
+  const userData = {
+    age: 30,
+    hasJob: true,
+    name: 'Joe',
+  };
 
-    return expect(result).resolves.toEqual(userData);
-  });
-  
-  test('decode object is failed', () => {
-    const userData = {
-        age: 30,
-        hasJob: 2,
-        name: 'Joe'
-    }
-    
-    const result = decodeObject<IUser>(userData, (data) => ({
-        age: decodeNumber(data.age),
-        hasJob: decodeBoolean(data.hasJob),
-        name: decodeString(data.name)
-    }));
+  const result = decodeObject<IUser>(userData, data => ({
+    age: decodeNumber(data.age),
+    hasJob: decodeBoolean(data.hasJob),
+    name: decodeString(data.name),
+  }));
 
-    return expect(result).rejects.toEqual('{\"age\":30,\"hasJob\":2,\"name\":\"Joe\"} is not valid: 2 should be boolean');
-  });
+  return expect(result).resolves.toEqual(userData);
+});
+
+test('decode object is failed', () => {
+  const userData = {
+    age: 30,
+    hasJob: 2,
+    name: 'Joe',
+  };
+
+  const result = decodeObject<IUser>(userData, data => ({
+    age: decodeNumber(data.age),
+    hasJob: decodeBoolean(data.hasJob),
+    name: decodeString(data.name),
+  }));
+
+  return expect(result).rejects.toEqual('{"age":30,"hasJob":2,"name":"Joe"} is not valid: 2 should be boolean');
+});
