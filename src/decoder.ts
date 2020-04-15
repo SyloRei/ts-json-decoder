@@ -55,3 +55,23 @@ export function decodeString(rawPrimitive: unknown): Promise<string> {
     resolve(rawPrimitive as string);
   });
 }
+
+export function decodeOptionalPrimitive<T>(raw: unknown, transform: (raw: unknown) => Promise<T>): Promise<T> {
+  return new Promise<T>(async (resolve) => {
+    if (raw === undefined) {
+        return resolve(raw);
+    }
+
+    transform(raw)
+  });
+}
+
+export function decodeOptionalObject<T>(raw: unknown, transform: (rawObject: unknown, transform: (rawObject: any) => Promisify<T>) => Promise<T>): Promise<T> {
+  return new Promise<T>(async (resolve) => {
+    if (raw === undefined) {
+        return resolve(raw);
+    }
+
+    transform(raw)
+  });
+}
