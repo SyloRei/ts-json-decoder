@@ -66,10 +66,7 @@ export function decodeOptionalPrimitive<T>(raw: unknown, transform: (raw: unknow
   });
 }
 
-export function decodeOptionalObject<T>(
-  raw: unknown,
-  transform: (rawObject: unknown, transform: (rawObject: any) => Promisify<T>) => Promise<T>,
-): Promise<T> {
+export function decodeOptionalObject<T>(raw: unknown, transform: (rawObject: any) => Promisify<T>): Promise<T> {
   return new Promise<T>(async resolve => {
     if (raw === undefined) {
       return resolve(raw);
