@@ -1,6 +1,6 @@
 {
   "name": "ts-json-decoder",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Typescript JSON Decoder",
   "main": "lib/decoder.js",
   "types": "lib/decoder.d.ts",
